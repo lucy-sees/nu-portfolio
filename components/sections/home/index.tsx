@@ -83,9 +83,7 @@ export default function HomeSection() {
       </motion.div>
 
       {/* Floating particles background */}
-      <div className="absolute inset-0 -z-10 pattern-grid-lg h-full w-full opacity-10 [mask-image:linear-gradient(transparent,black)]" 
-       style={{backgroundImage: 'linear-gradient(hsl(var(--primary) / 0.3) 1px, transparent 1px)', 
-               backgroundSize: '40px 40px'}}>
+      <div className="absolute inset-0 -z-20 overflow-hidden">
         {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
@@ -150,42 +148,44 @@ export default function HomeSection() {
             )}
           </motion.h2>
         </div>
-        <div className="space-x-4">
+
+        {/* Buttons Section */}
+        <div className="flex flex-row gap-4">
+          {/* Filled Button */}
           <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Button
-            onClick={() => router.push("#projects")}
-            variant="gradientOutline"
-            className="relative overflow-hidden hc-border"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="relative z-10 rounded-md">
-              See My Work
-            </span>
-            <div className="absolute inset-0 rounded-md animate-rotate-gradient bg-gradient-to-r from-primary via-secondary to-accent" />
-          </Button>
-        </motion.div>
-        {data.home.cvLink && (
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Button
-            asChild
-            variant="gradientOutline"
-            className="relative overflow-hidden hc-border"
-          >
-            <Link href={data.home.cvLink}>
-              <span className="relative z-10 rounded-md">
-                Contact Me
-              </span>
-              <div className="absolute inset-0 rounded-md animate-rotate-gradient bg-gradient-to-r from-secondary via-accent to-primary" />
-            </Link>
-          </Button>
-        </motion.div>
-      )}
-    </div>
+            <Button
+              onClick={() => router.push("#projects")}
+              className="relative overflow-hidden bg-gradient-to-r from-primary to-secondary text-white filled-button"
+            >
+              <span className="relative z-10">See My Work</span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
+            </Button>
+          </motion.div>
+
+          {/* Outlined Button with Animated Border */}
+          {data.home.cvLink && (
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="relative p-[2px] rounded-lg animate-rotate-gradient bg-gradient-to-r from-gradient-pink via-gradient-cyan to-gradient-purple bg-[length:400%_400%]">
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="relative bg-background hover:bg-background text-foreground outlined-button"
+                >
+                  <Link href={data.home.cvLink}>
+                    <span className="relative z-10">Contact Me</span>
+                    <div className="absolute inset-0 bg-background/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </div>
       </div>
 
       {/* Enhanced CodeTyping with neon glow */}
@@ -199,28 +199,31 @@ export default function HomeSection() {
         <div className="absolute inset-0 -z-10 bg-cyan-400/20 blur-3xl rounded-lg" />
       </motion.div>
 
-      {/* Animated scroll indicator */}
-      <motion.div
-        className="hidden lg:block absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        onClick={() => router.push("#about")}
-      >
-        <div className="w-6 h-10 border-2 border-cyan-400 rounded-full flex items-start justify-center p-1 neon-border-cyan">
-          <motion.div
+    {/* Animated scroll indicator */}
+    <motion.div
+      className="hidden lg:block absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 2 }}
+      onClick={() => router.push("#about")}
+    >
+      <div className="mouse w-24 mx-auto">
+        <div className="mouse-icon w-6 h-11 border-2 border-cyan-400 rounded-full relative text-center">
+          <motion.span
+            className="mouse-wheel block w-1 h-1.5 bg-cyan-400 rounded-full mx-auto"
             animate={{
-              y: [0, 12, 0],
+              y: [2, 20, 2],
+              opacity: [0, 1, 0],
             }}
             transition={{
-              duration: 1.5,
+              duration: 1.6,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="w-1.5 h-3 bg-cyan-400 rounded-full neon-glow-cyan"
           />
         </div>
-      </motion.div>
+      </div>
+    </motion.div>
     </section>
   );
 }

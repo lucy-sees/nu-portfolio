@@ -8,7 +8,8 @@ const defaultProps = {
   theme: themes.vsDark,
 };
 
-const codeSnippet = `// Welcome to my AI-Powered Portfolio! 🚀
+const codeSnippet = `
+// Welcome to my AI-Powered Portfolio! 🚀
 import { NextDeveloper } from 'lucywmwangi';
 import { AIExpertise } from '@/skills';
 
@@ -50,7 +51,7 @@ export default function CodeTyping() {
         setCurrentLine(currentLine + 1);
         setCursorPosition(0);
       }
-    }, Math.random() * 50 + 30);
+    }, Math.random() * 60 + 30);
 
     return () => clearTimeout(timeout);
   }, [currentLine, cursorPosition]);
@@ -75,20 +76,19 @@ export default function CodeTyping() {
             {...defaultProps}
             code={displayedLines.join("\n")}
             language="tsx"
-            theme={{
-    ...themes.vsDark,
-    plain: {
-      ...themes.vsDark.plain,
-      backgroundColor: '#000000',
-      color: '#FFFFFF',
-    },
-    styles: [
-      { types: ['keyword'], style: { color: 'hsl(var(--primary))' } },
-      { types: ['string'], style: { color: 'hsl(var(--highlight))' } },
-      { types: ['function'], style: { color: 'hsl(var(--secondary))' } },
-      { types: ['punctuation'], style: { color: 'hsl(var(--foreground))' } },
-    ]
-  }}
+            theme={{...themes.vsDark,
+              plain: {
+                ...themes.vsDark.plain,
+                backgroundColor: '#000000',
+                color: '#FFFFFF',
+              },
+              styles: [
+                { types: ['keyword'], style: { color: 'hsl(var(--primary))' } },
+                { types: ['string'], style: { color: 'hsl(var(--highlight))' } },
+                { types: ['function'], style: { color: 'hsl(var(--secondary))' } },
+                { types: ['punctuation'], style: { color: 'hsl(var(--foreground))' } },
+              ]
+            }}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
               <>
