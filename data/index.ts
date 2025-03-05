@@ -148,15 +148,15 @@ const data = {
       },
       {
         id: 13,
-        name: "firebase",
-        src: "/skills/firebase.svg",
-        link: "https://en.wikipedia.org/wiki/Firebase",
+        name: "prisma",
+        src: "/skills/prisma.svg",
+        link: "https://en.wikipedia.org/wiki/Prisma",
       },
       {
         id: 14,
-        name: "markdown",
-        src: "/skills/markdown.svg",
-        link: "https://en.wikipedia.org/wiki/Markdown",
+        name: "aws",
+        src: "/skills/AWS.svg",
+        link: "https://en.wikipedia.org/wiki/AWS",
       },
       {
         id: 15,
