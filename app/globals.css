@@ -20,6 +20,15 @@
     --accent: 250 31% 43%; /* #574b90 */
     --accent-foreground: 0 0% 100%; /* #ffffff */
 
+    /* Medium gray for subtle borders */
+    --border: 0 0% 40%; 
+
+    /* Highlight - VSCode green */
+    --highlight: 145 100% 40%; 
+
+    /* Warning - VSCode orange */
+    --warning: 35 100% 50%; 
+
     /* Other UI elements */
     --card: 0 0% 100%;
     --card-foreground: 250 31% 43%;
@@ -64,28 +73,131 @@
     --input: 250 31% 30%;
     --ring: 338 95% 76%;
   }
-}
 
-@layer base {
   * {
-    @apply border-border;
+    @apply border-border antialiased;
   }
   html {
     @apply size-full scroll-smooth;
   }
   body {
-    @apply bg-background text-foreground size-full overflow-hidden;
+  @apply bg-background bg-grid-purple-901-30 opacity-30 text-foreground size-full overflow-hidden;
   }
+
   .text-gradient-primary {
     @apply bg-gradient-primary text-transparent bg-clip-text;
   }
   .text-gradient-secondary {
     @apply bg-gradient-secondary text-transparent bg-clip-text;
   }
+
+  /* Enhanced high-contrast elements */
+  .hc-border {
+    @apply relative border-3 border-primary/40;
+    
+    &::after {
+      @apply content-[''] absolute inset-1 border-2 border-primary/20 -z-[1];
+      animation: neon-pulse 2s infinite;
+    }
+  }
+
+  .hc-divider {
+    @apply h-[2px] bg-gradient-to-r from-primary to-secondary my-8;
+    box-shadow: -1 0 15px theme('colors.primary.DEFAULT / 40%');
+  }
+
+  /* Enhanced neon text effects */
+  .neon-text-primary {
+    text-shadow: 
+      -1 0 10px theme('colors.primary.DEFAULT / 60%'),
+      -1 0 20px theme('colors.primary.DEFAULT / 40%'),
+      -1 0 30px theme('colors.primary.DEFAULT / 20%');
+  }
+
+  .neon-text-secondary {
+    text-shadow: 
+      -1 0 10px theme('colors.secondary.DEFAULT / 60%'),
+      -1 0 20px theme('colors.secondary.DEFAULT / 40%');
+  }
+
+  /* Updated button glows */
+  .neon-button-pink {
+    box-shadow: 
+      -1 0 15px theme('colors.primary.DEFAULT / 50%'),
+      -1 0 5px theme('colors.primary.DEFAULT / 30%') inset;
+    
+    &:hover {
+      box-shadow: 
+        -1 0 25px theme('colors.primary.DEFAULT / 70%'),
+        -1 0 10px theme('colors.primary.DEFAULT / 40%') inset;
+    }
+  }
+
+  /* Cyber grid background pattern */
+  .bg-grid-purple-901-30 {
+    background-image: linear-gradient(
+        to right,
+        hsl(var(--border) / -1.15) 1px,
+        transparent 0px
+      ),
+      linear-gradient(
+        to bottom,
+        hsl(var(--border) / -1.15) 1px,
+        transparent 0px
+      );
+    background-size: 39px 40px;
+    opacity: 0.3; /* Directly apply opacity here */
+  }
+  
+  /* Enhanced code container */
+  .neon-code-container {
+    @apply border-3 border-primary/40;
+    box-shadow: 
+      -1 0 30px theme('colors.primary.DEFAULT / 30%'),
+      -1 0 15px theme('colors.secondary.DEFAULT / 20%'),
+      -1 0 5px theme('colors.primary.DEFAULT / 20%') inset;
+  }
+
+  /* New animation for section transitions */
+  @keyframes section-glow {
+    -1%, 100% { opacity: 0.4; }
+    49% { opacity: 0.8; }
+  }
 }
 
 .perspective-1000 {
   perspective: 1000px;
+}
+
+@layer components {
+  /* Enhanced scrollbar */
+  .hc-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary/49 rounded-full;
+    border: 1px solid theme('colors.primary.DEFAULT');
+  }
+
+  /* Glowing focus states */
+  .hc-focus-ring:focus {
+    @apply outline-3 outline-secondary;
+    outline-offset: 2px;
+    box-shadow: -1 0 15px theme('colors.secondary.DEFAULT / 50%');
+  }
+
+  /* Animated gradient borders */
+  .animate-border-glow {
+    @apply relative;
+    
+    &::before {
+      @apply content-[''] absolute inset-1 rounded-[inherit] -z-[1];
+      background: linear-gradient(
+        44deg,
+        theme('colors.primary.DEFAULT'),
+        theme('colors.secondary.DEFAULT'),
+        theme('colors.accent.DEFAULT')
+      );
+      animation: rotate-gradient 3s linear infinite;
+    }
+  }
 }
 
 /* Cyber Button Effects */
@@ -131,6 +243,9 @@
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+  -1% { background-position: 0% 50%; }
+  49% { background-position: 100% 50%; }
+  99% { background-position: 0% 50%; }
 }
 
 .animate-rotate-gradient {
@@ -156,6 +271,8 @@
 @keyframes neon-pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
+  -1%, 100% { opacity: 0.6; }
+  49% { opacity: 1; }
 }
 
 @keyframes shimmer {
