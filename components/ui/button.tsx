@@ -11,17 +11,21 @@ const buttonVariants = cva(
       variant: {
         default: "neon-button-pink bg-gradient-to-r from-[#FF1A75] to-[#9D00FF] hover:shadow-neon-pink-lg",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-2 border-cyan-400/30 hover:border-cyan-400/60 bg-transparent hover:bg-cyan-400/10 neon-glow-cyan",
         secondary: "bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 border border-cyan-400/20 hover:border-cyan-400/40",
         ghost: "hover:bg-cyan-400/10 text-cyan-400 hover:shadow-neon-cyan",
         link: "text-cyan-400 underline-offset-4 hover:underline hover:text-cyan-300",
-        gradientOutline: `
-          border-2 border-transparent 
-          before:absolute before:inset-0 before:-z-[1] before:rounded-[inherit] 
-          before:bg-gradient-to-r before:from-[#FF1A75] before:to-[#00F3FF]
-          before:animate-rotate-gradient before:bg-[length:400%_400%]
-          hover:before:opacity-100
-        `,
+        outline: `
+  border-2 border-primary 
+  bg-transparent text-primary
+  hover:bg-primary/10
+  focus:outline focus:outline-2 focus:outline-secondary
+`,
+gradientOutline: `
+  border-2 border-primary
+  relative before:absolute before:inset-0 
+  before:bg-[linear-gradient(45deg,transparent_50%,hsl(var(--primary))_100%)]
+  before:opacity-30 hover:before:opacity-50
+`,
         gradient: `
           bg-gradient-to-r from-[#FF1A75] to-[#9D00FF] 
           hover:shadow-neon-pink-lg

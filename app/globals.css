@@ -21,13 +21,13 @@
     --accent-foreground: 0 0% 100%; /* #ffffff */
 
     /* Medium gray for subtle borders */
-    --border: 0 0% 40%; 
+    --border: 0 0% 40%;
 
     /* Highlight - VSCode green */
-    --highlight: 145 100% 40%; 
+    --highlight: 145 100% 40%;
 
     /* Warning - VSCode orange */
-    --warning: 35 100% 50%; 
+    --warning: 35 100% 50%;
 
     /* Other UI elements */
     --card: 0 0% 100%;
@@ -38,7 +38,6 @@
     --muted-foreground: 250 31% 43%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    --border: 250 31% 90%;
     --input: 250 31% 90%;
     --ring: 338 95% 76%;
     --radius: 0.75rem;
@@ -77,269 +76,212 @@
   * {
     @apply border-border antialiased;
   }
+
   html {
     @apply size-full scroll-smooth;
   }
+
   body {
-  @apply bg-background bg-grid-purple-901-30 opacity-30 text-foreground size-full overflow-hidden;
+    @apply bg-background text-foreground size-full overflow-hidden;
   }
 
   .text-gradient-primary {
     @apply bg-gradient-primary text-transparent bg-clip-text;
   }
+
   .text-gradient-secondary {
     @apply bg-gradient-secondary text-transparent bg-clip-text;
   }
+}
 
+@layer components {
   /* Enhanced high-contrast elements */
   .hc-border {
-    @apply relative border-3 border-primary/40;
-    
+    @apply relative border-2 border-primary/40;
+
     &::after {
-      @apply content-[''] absolute inset-1 border-2 border-primary/20 -z-[1];
-      animation: neon-pulse 2s infinite;
+      @apply content-[''] absolute inset-0 border border-primary/20 -z-[1];
+      animation: neon-pulse 3s infinite;
     }
   }
 
   .hc-divider {
     @apply h-[2px] bg-gradient-to-r from-primary to-secondary my-8;
-    box-shadow: -1 0 15px theme('colors.primary.DEFAULT / 40%');
+    box-shadow: 0 0 15px theme('colors.primary.DEFAULT / 40%');
   }
 
   /* Enhanced neon text effects */
   .neon-text-primary {
     text-shadow: 
-      -1 0 10px theme('colors.primary.DEFAULT / 60%'),
-      -1 0 20px theme('colors.primary.DEFAULT / 40%'),
-      -1 0 30px theme('colors.primary.DEFAULT / 20%');
+      0 0 10px theme('colors.primary.DEFAULT / 60%'),
+      0 0 20px theme('colors.primary.DEFAULT / 40%'),
+      0 0 30px theme('colors.primary.DEFAULT / 20%');
   }
 
   .neon-text-secondary {
     text-shadow: 
-      -1 0 10px theme('colors.secondary.DEFAULT / 60%'),
-      -1 0 20px theme('colors.secondary.DEFAULT / 40%');
+      0 0 10px theme('colors.secondary.DEFAULT / 60%'),
+      0 0 20px theme('colors.secondary.DEFAULT / 40%');
   }
 
   /* Updated button glows */
   .neon-button-pink {
     box-shadow: 
-      -1 0 15px theme('colors.primary.DEFAULT / 50%'),
-      -1 0 5px theme('colors.primary.DEFAULT / 30%') inset;
-    
+      0 0 15px theme('colors.primary.DEFAULT / 50%'),
+      0 0 5px theme('colors.primary.DEFAULT / 30%') inset;
+
     &:hover {
       box-shadow: 
-        -1 0 25px theme('colors.primary.DEFAULT / 70%'),
-        -1 0 10px theme('colors.primary.DEFAULT / 40%') inset;
+        0 0 25px theme('colors.primary.DEFAULT / 70%'),
+        0 0 10px theme('colors.primary.DEFAULT / 40%') inset;
     }
   }
 
   /* Cyber grid background pattern */
-  .bg-grid-purple-901-30 {
-    background-image: linear-gradient(
-        to right,
-        hsl(var(--border) / -1.15) 1px,
-        transparent 0px
-      ),
-      linear-gradient(
-        to bottom,
-        hsl(var(--border) / -1.15) 1px,
-        transparent 0px
-      );
-    background-size: 39px 40px;
-    opacity: 0.3; /* Directly apply opacity here */
+  .bg-grid-purple-900 {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border) / 0.15) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
-  
+
   /* Enhanced code container */
   .neon-code-container {
-    @apply border-3 border-primary/40;
+    @apply border-2 border-primary/40;
     box-shadow: 
-      -1 0 30px theme('colors.primary.DEFAULT / 30%'),
-      -1 0 15px theme('colors.secondary.DEFAULT / 20%'),
-      -1 0 5px theme('colors.primary.DEFAULT / 20%') inset;
+      0 0 30px theme('colors.primary.DEFAULT / 30%'),
+      0 0 15px theme('colors.secondary.DEFAULT / 20%'),
+      0 0 5px theme('colors.primary.DEFAULT / 20%') inset;
   }
 
-  /* New animation for section transitions */
-  @keyframes section-glow {
-    -1%, 100% { opacity: 0.4; }
-    49% { opacity: 0.8; }
-  }
-}
-
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-@layer components {
   /* Enhanced scrollbar */
-  .hc-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-primary/49 rounded-full;
-    border: 1px solid theme('colors.primary.DEFAULT');
+  .hc-scrollbar {
+    &::-webkit-scrollbar {
+      @apply w-2;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-primary/50 rounded-full;
+      border: 2px solid theme('colors.primary.DEFAULT');
+    }
+
+    &::-webkit-scrollbar-track {
+      @apply bg-background;
+    }
   }
 
   /* Glowing focus states */
-  .hc-focus-ring:focus {
-    @apply outline-3 outline-secondary;
-    outline-offset: 2px;
-    box-shadow: -1 0 15px theme('colors.secondary.DEFAULT / 50%');
+  .hc-focus-ring {
+    &:focus {
+      @apply outline-2 outline-secondary;
+      outline-offset: 2px;
+      box-shadow: 0 0 15px theme('colors.secondary.DEFAULT / 50%');
+    }
   }
 
   /* Animated gradient borders */
   .animate-border-glow {
     @apply relative;
-    
+
     &::before {
-      @apply content-[''] absolute inset-1 rounded-[inherit] -z-[1];
+      @apply content-[''] absolute inset-0 rounded-[inherit] -z-[1];
       background: linear-gradient(
-        44deg,
+        45deg,
         theme('colors.primary.DEFAULT'),
         theme('colors.secondary.DEFAULT'),
         theme('colors.accent.DEFAULT')
       );
-      animation: rotate-gradient 3s linear infinite;
+      animation: rotate-gradient 4s linear infinite;
     }
   }
 }
 
-/* Cyber Button Effects */
-.clip-cyber-border {
-  clip-path: polygon(
-    0 0,
-    calc(100% - 8px) 0,
-    100% 8px,
-    100% 100%,
-    8px 100%,
-    0 calc(100% - 8px)
-  );
-}
-
-/* Neon Glow Effects */
-.neon-glow {
-  &-cyan {
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
   }
-  &-pink {
-    box-shadow: 0 0 15px rgba(255, 26, 117, 0.3);
+
+  /* Cyber Button Effects */
+  .clip-cyber-border {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 8px) 0,
+      100% 8px,
+      100% 100%,
+      8px 100%,
+      0 calc(100% - 8px)
+    );
   }
-}
 
-/* Hover Shadows */
-.hover\:shadow-neon {
-  &-cyan {
-    box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
-  }
-  &-pink {
-    box-shadow: 0 0 25px rgba(255, 26, 117, 0.5);
-  }
-  &-cyan-lg {
-    box-shadow: 0 0 35px rgba(0, 243, 255, 0.6);
-  }
-  &-pink-lg {
-    box-shadow: 0 0 35px rgba(255, 26, 117, 0.6);
-  }
-}
-
-/* Gradient Animations */
-@keyframes rotate-gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-  -1% { background-position: 0% 50%; }
-  49% { background-position: 100% 50%; }
-  99% { background-position: 0% 50%; }
-}
-
-.animate-rotate-gradient {
-  animation: rotate-gradient 4s linear infinite;
-}
-
-/* Cyber Border Animation */
-.clip-cyber-border::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(
-    45deg,
-    #FF1A75 0%,
-    #00F3FF 50%,
-    #9D00FF 100%
-  );
-  z-index: -1;
-  animation: rotate-gradient 4s linear infinite;
-}
-
-/* Neon animations */
-@keyframes neon-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-  -1%, 100% { opacity: 0.6; }
-  49% { opacity: 1; }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes border-glow {
-  0% { border-color: rgba(0, 243, 255, 0.3); }
-  50% { border-color: rgba(0, 243, 255, 0.8); }
-  100% { border-color: rgba(0, 243, 255, 0.3); }
-}
-
-.neon {
-  &-text {
-    &-pink {
-      text-shadow: 0 0 10px rgba(255, 26, 117, 0.8);
-    }
+  /* Neon Glow Effects */
+  .neon-glow {
     &-cyan {
-      text-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
-    }
-    &-purple {
-      text-shadow: 0 0 10px rgba(157, 0, 255, 0.8);
-    }
-  }
-
-  &-button {
-    &-pink {
-      border: 2px solid #FF1A75;
-      box-shadow: 0 0 15px rgba(255, 26, 117, 0.5);
-      background: linear-gradient(45deg, var(--gradient-pink));
-      
-      &:hover {
-        box-shadow: 0 0 25px rgba(255, 26, 117, 0.8);
-      }
-    }
-
-    &-cyan {
-      border: 2px solid #00F3FF;
       box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-      
-      &:hover {
-        box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
-      }
+    }
+    &-pink {
+      box-shadow: 0 0 15px rgba(255, 26, 117, 0.3);
     }
   }
 
-  &-glow {
+  /* Hover Shadows */
+  .hover\:shadow-neon {
     &-cyan {
-      filter: drop-shadow(0 0 5px #00F3FF);
+      box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
+    }
+    &-pink {
+      box-shadow: 0 0 25px rgba(255, 26, 117, 0.5);
+    }
+    &-cyan-lg {
+      box-shadow: 0 0 35px rgba(0, 243, 255, 0.6);
+    }
+    &-pink-lg {
+      box-shadow: 0 0 35px rgba(255, 26, 117, 0.6);
+    }
+  }
+
+  /* Animation keyframes */
+  @keyframes rotate-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes neon-pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes border-glow {
+    0% { border-color: rgba(0, 243, 255, 0.3); }
+    50% { border-color: rgba(0, 243, 255, 0.8); }
+    100% { border-color: rgba(0, 243, 255, 0.3); }
+  }
+
+  .animate {
+    &-rotate-gradient {
+      animation: rotate-gradient 4s linear infinite;
+    }
+    &-shimmer {
+      background-size: 200% auto;
+      animation: shimmer 3s linear infinite;
+    }
+    &-border-glow {
+      animation: border-glow 2s ease-in-out infinite;
     }
   }
 }
-
-.animate {
-  &-shimmer {
-    background-size: 200% auto;
-    animation: shimmer 3s linear infinite;
-  }
-
-  &-border-glow {
-    animation: border-glow 2s ease-in-out infinite;
-  }
+.shadow-glow-primary {
+  box-shadow: 0 0 15px hsl(var(--primary) / 0.4);
 }
 
-.neon-code-container {
-  box-shadow: 
-    0 0 30px rgba(255, 26, 117, 0.3),
-    0 0 50px rgba(0, 243, 255, 0.3);
+.pattern-grid-lg {
+  background-image: 
+    linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
 }

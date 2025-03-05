@@ -83,7 +83,9 @@ export default function HomeSection() {
       </motion.div>
 
       {/* Floating particles background */}
-      <div className="absolute inset-0 -z-20 overflow-hidden">
+      <div className="absolute inset-0 -z-10 pattern-grid-lg h-full w-full opacity-10 [mask-image:linear-gradient(transparent,black)]" 
+       style={{backgroundImage: 'linear-gradient(hsl(var(--primary) / 0.3) 1px, transparent 1px)', 
+               backgroundSize: '40px 40px'}}>
         {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
@@ -150,35 +152,40 @@ export default function HomeSection() {
         </div>
         <div className="space-x-4">
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Button
+            onClick={() => router.push("#projects")}
+            variant="gradientOutline"
+            className="relative overflow-hidden hc-border"
           >
-            <Button
-              onClick={() => router.push("#projects")}
-              className="neon-button-pink relative overflow-hidden"
-            >
-              <span className="relative z-10">See My Work</span>
-              <div className="absolute inset-0 bg-gradient-pink animate-shimmer" />
-            </Button>
-          </motion.div>
-          {data.home.cvLink && (
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                asChild
-                className="relative overflow-hidden"
-                variant="ghost"
-              >
-                <Link href={data.home.cvLink}>
-                  <span className="relative z-10">Contact Me</span>
-                  <div className="absolute inset-0 border-cyan-400/20 animate-border-glow" />
-                </Link>
-              </Button>
-            </motion.div>
-          )}
-        </div>
+            <span className="relative z-10 rounded-md">
+              See My Work
+            </span>
+            <div className="absolute inset-0 rounded-md animate-rotate-gradient bg-gradient-to-r from-primary via-secondary to-accent" />
+          </Button>
+        </motion.div>
+        {data.home.cvLink && (
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Button
+            asChild
+            variant="gradientOutline"
+            className="relative overflow-hidden hc-border"
+          >
+            <Link href={data.home.cvLink}>
+              <span className="relative z-10 rounded-md">
+                Contact Me
+              </span>
+              <div className="absolute inset-0 rounded-md animate-rotate-gradient bg-gradient-to-r from-secondary via-accent to-primary" />
+            </Link>
+          </Button>
+        </motion.div>
+      )}
+    </div>
       </div>
 
       {/* Enhanced CodeTyping with neon glow */}

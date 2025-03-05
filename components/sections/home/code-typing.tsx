@@ -75,6 +75,20 @@ export default function CodeTyping() {
             {...defaultProps}
             code={displayedLines.join("\n")}
             language="tsx"
+            theme={{
+    ...themes.vsDark,
+    plain: {
+      ...themes.vsDark.plain,
+      backgroundColor: '#000000',
+      color: '#FFFFFF',
+    },
+    styles: [
+      { types: ['keyword'], style: { color: 'hsl(var(--primary))' } },
+      { types: ['string'], style: { color: 'hsl(var(--highlight))' } },
+      { types: ['function'], style: { color: 'hsl(var(--secondary))' } },
+      { types: ['punctuation'], style: { color: 'hsl(var(--foreground))' } },
+    ]
+  }}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
               <>
