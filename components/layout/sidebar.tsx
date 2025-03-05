@@ -15,7 +15,7 @@ export default function Sidebar() {
       >
         <BorderActive /> <Info />
       </Link>
-      <div>
+      <div className="border border-cyan-300">
         {data.sidebar.links.map(
           (link) =>
             link.link && (
@@ -24,7 +24,7 @@ export default function Sidebar() {
                 href={link.link}
                 target="_blank"
                 className={cn(
-                  "relative size-14 flex items-center justify-center text-muted-foreground hover:bg-background mt-auto"
+                  "border border-cyan-300 relative size-14 flex items-center justify-center text-muted-foreground hover:bg-background mt-auto"
                 )}
               >
                 <link.icon />
@@ -37,5 +37,5 @@ export default function Sidebar() {
 }
 
 const BorderActive = () => (
-  <div className="absolute left-0 top-0 h-full w-0.5 bg-primary-foreground" />
+  <div className="absolute left-0 top-0 h-full w-0.5 bg-primary-foreground border border-orange-400 m-1" />
 );
