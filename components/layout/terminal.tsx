@@ -85,7 +85,7 @@ export default function Terminal() {
   };
 
   return (
-    <div className="border-t w-full text-xs h-full bg-muted overflow-hidden">
+    <div className="border-t w-full text-xs h-full bg-muted overflow-hidden border border-cyan-300">
       {/* tabs */}
       <ul className="flex items-start gap-4 sticky top-0 text-muted-foreground px-4 py-2 bg-muted flex-shrink-0">
         <li className="cursor-pointer hover:text-foreground">PROBLEMS</li>

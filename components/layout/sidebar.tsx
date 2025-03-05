@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Sidebar() {
   return (
-    <div className="h-full border-r bg-muted hidden lg:flex flex-col justify-start flex-shrink-0">
+    <div className="h-full border-r bg-muted hidden lg:flex flex-col justify-start flex-shrink-0 border border-cyan-300">
       <Link
         href="/"
         className={cn(
