@@ -45,8 +45,8 @@ export default function Header() {
         <Image
           src="/imgs/logo.png"
           alt="LM Logo"
-          width={24}
-          height={24}
+          width={28}
+          height={28}
           className="object-contain"
         />
       </div>
