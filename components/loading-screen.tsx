@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Lottie from "react-lottie";
+import animationData from "@/public/lottie/loading.json";
 
 export default function LoadingScreen() {
   const [isMounted, setIsMounted] = useState(false);
@@ -9,15 +11,20 @@ export default function LoadingScreen() {
     if (!isMounted) setIsMounted(true);
   }, [isMounted]);
 
-  if (isMounted) return;
+  if (isMounted) return null;
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
 
   return (
-    <div className="fixed top-0 left-0 size-full bg-muted z-50 flex items-center justify-center">
-      <div className="flex items-center gap-3">
-        <span className="block size-5 animate-bounce duration-900 rounded-full bg-primary-foreground" />
-        <span className="block size-5 animate-bounce duration-700 rounded-full bg-primary-foreground" />
-        <span className="block size-5 animate-bounce duration-300 rounded-full bg-primary-foreground" />
-      </div>
+    <div className="fixed top-0 left-0 w-full h-full bg-muted z-50 flex items-center justify-center">
+      <Lottie options={defaultOptions} height={400} width={400} />
     </div>
   );
 }
