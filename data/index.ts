@@ -31,27 +31,27 @@ const data = {
     projects: [
       {
         id: 1,
-        title: "Coder Woman Platform",
+        title: "Hurudevs",
         description:
           "Platform to sell online courses, helping empower women in tech by making coding education accessible.\n\n Technologies Used: Next.js, React.js, CSS, Stripe API.",
         image: "/projects-imgs/cw.png",
-        previewLink: "https://coderwoman.com",
+        previewLink: "https://huru-devs.tech",
       },
       {
         id: 2,
-        title: "RetroCech Website",
+        title: "Davinxi Cabin",
         description:
           "A professional and visually appealing website that captures the vintage style of the business while ensuring smooth performance and easy navigation. \n\n Technologies Used: Next.js, Tailwind CSS, React.js.",
         image: "/projects-imgs/retrocech.png",
-        previewLink: "https://retrocech.com",
+        previewLink: "https://davinxicabin.vercel.app",
       },
       {
         id: 3,
-        title: "E-commerce Platform",
+        title: "Stellar Tempo",
         description:
-          "Worked on one of a biggest e-commerce platform in Poland, as part of a Scrum team for 1.5 years, focusing on checkout and payment workflows. \n\n Technologies Used: Next.js, React.js, Tailwind CSS, Stripe API.",
+          "Stellar Tempo is a cosmic, neubrutalist web app designed to integrate your life schedule and creative passions into one engaging platform. Balancing high-impact tech projects with soulful music creation.",
         image: "/projects-imgs/e-commerce.png",
-        previewLink: "https://x-kom.pl",
+        previewLink: "https://stellar-tempo.vercel.app",
       },
       {
         id: 4,
@@ -59,7 +59,7 @@ const data = {
         description:
           "A reliable and polished website that makes it easy for the expert to share their skills and impress potential clients or employers. \n\n Technologies Used: Next.js, React.js, CSS.",
         image: "/projects-imgs/lukaskadela.png",
-        previewLink: "https://lukaskadela.com",
+        previewLink: "https://lucy-sees.vercel.app",
       },
       // {
       //   id: 5,
@@ -167,7 +167,7 @@ const data = {
     ],
   },
   contact: {
-    email: "lucy.w.mwangi.dev@gmail.com",
+    email: "lucywanjirumwangi21@gmail.com",
   },
 };
 
