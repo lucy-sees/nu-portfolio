@@ -1,6 +1,18 @@
-import type { Metadata } from "next";
+// app/layout.tsx
+import type { Metadata as NextMetadata } from "next";
 import { Fira_Code } from "next/font/google";
 import "./globals.css";
+
+// Extend the existing Metadata type
+interface Metadata extends NextMetadata {
+  X?: {
+    card: string;
+    title: string;
+    description: string;
+    images: string[];
+    creator: string;
+  };
+}
 
 const firaCode = Fira_Code({ subsets: ["latin"] });
 
@@ -45,7 +57,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  X: {
+  X: { // Now this is valid
     card: "summary_large_image",
     title: "Lucy W. Mwangi | Next.js & React Developer",
     description:
