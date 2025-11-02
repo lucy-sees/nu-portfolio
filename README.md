@@ -20,7 +20,7 @@ A modern, interactive portfolio website built with Next.js, React, and TypeScrip
 - **Framework**: Next.js
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
+- **Animations**: Three.js
 - **Code Highlighting**: Prism React Renderer
 - **UI Components**: Custom components with shadcn/ui
 - **AI Model**: Google Gemini
@@ -104,7 +104,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [Next.js](https://nextjs.org)
 - [Tailwind CSS](https://tailwindcss.com)
-- [Framer Motion](https://www.framer.com/motion)
+- [Three.js](https://threejs.org/)
 - [shadcn/ui](https://ui.shadcn.com)
 - [Google Gemini](https://deepmind.google/technologies/gemini/)
 - [Resend](https://resend.com)
