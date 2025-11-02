@@ -1,5 +1,6 @@
+// components/sections/contact/chat-assistance.tsx
 import { useState, useRef, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import * as THREE from 'three';
 import { Send, Bot, User, Trash2, AlertCircle } from "lucide-react";
 import debounce from "lodash/debounce";
 import ReactMarkdown from "react-markdown";
@@ -23,6 +24,12 @@ type QuickOption = {
 type ConfirmClearState = {
   show: boolean;
   timeoutId?: NodeJS.Timeout;
+};
+
+type AnimationState = {
+  opacity: number;
+  y: number;
+  scale: number;
 };
 
 const RATE_LIMIT_KEY = "chatRateLimit";
@@ -78,6 +85,15 @@ export default function ChatAssistant() {
   const [confirmClear, setConfirmClear] = useState<ConfirmClearState>({
     show: false,
   });
+  
+  // Animation states
+  const [messageAnimations, setMessageAnimations] = useState<{[key: number]: AnimationState}>({});
+  const [quickOptionsAnimation, setQuickOptionsAnimation] = useState({ opacity: 0 });
+  const [typingAnimation, setTypingAnimation] = useState({ opacity: 0 });
+  const [buttonAnimations, setButtonAnimations] = useState<{[key: string]: AnimationState}>({});
+
+  const animationRef = useRef<number>();
+  const startTimesRef = useRef<{[key: string]: number}>({});
 
   useEffect(() => {
     if (remainingMessages < MAX_MESSAGES_PER_HOUR) {
@@ -90,6 +106,84 @@ export default function ChatAssistant() {
       );
     }
   }, [remainingMessages]);
+
+  // Three.js inspired animation system
+  const animate = useCallback(() => {
+    const now = Date.now();
+    const updatedAnimations = { ...messageAnimations };
+    let needsUpdate = false;
+
+    // Animate messages
+    messages.forEach((_, index) => {
+      const key = `message-${index}`;
+      if (!startTimesRef.current[key]) {
+        startTimesRef.current[key] = now;
+        updatedAnimations[index] = { opacity: 0, y: 10, scale: 1 };
+        needsUpdate = true;
+      }
+
+      const elapsed = now - startTimesRef.current[key];
+      const duration = 300; // 0.3 seconds
+
+      if (elapsed < duration) {
+        const progress = elapsed / duration;
+        const easeOut = 1 - Math.pow(1 - progress, 3); // Cubic ease out
+        
+        updatedAnimations[index] = {
+          opacity: easeOut,
+          y: 10 * (1 - easeOut),
+          scale: 1
+        };
+        needsUpdate = true;
+      } else if (!updatedAnimations[index] || updatedAnimations[index].opacity < 1) {
+        updatedAnimations[index] = { opacity: 1, y: 0, scale: 1 };
+        needsUpdate = true;
+      }
+    });
+
+    // Animate quick options with delay
+    if (messages.length === 1 && !quickOptionsAnimation.opacity) {
+      const quickOptionsElapsed = now - (startTimesRef.current['quick-options'] || now);
+      if (quickOptionsElapsed > 500) { // 0.5 second delay
+        const progress = Math.min((quickOptionsElapsed - 500) / 300, 1);
+        setQuickOptionsAnimation({ opacity: progress });
+        needsUpdate = true;
+      }
+    }
+
+    // Animate typing indicator
+    if (isTyping && !typingAnimation.opacity) {
+      setTypingAnimation({ opacity: 1 });
+      needsUpdate = true;
+    }
+
+    if (needsUpdate) {
+      setMessageAnimations(updatedAnimations);
+    }
+
+    animationRef.current = requestAnimationFrame(animate);
+  }, [messages, isTyping, messageAnimations, quickOptionsAnimation, typingAnimation]);
+
+  useEffect(() => {
+    animationRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [animate]);
+
+  useEffect(() => {
+    // Reset animations when messages change
+    const newStartTimes: {[key: string]: number} = {};
+    messages.forEach((_, index) => {
+      newStartTimes[`message-${index}`] = Date.now();
+    });
+    if (messages.length === 1) {
+      newStartTimes['quick-options'] = Date.now();
+    }
+    startTimesRef.current = newStartTimes;
+  }, [messages.length]);
 
   const debouncedApiCall = useCallback((chatMessages: ChatMessage[]) => {
     const apiCall = async () => {
@@ -220,10 +314,35 @@ export default function ChatAssistant() {
     }
   };
 
+  // Button hover animation handler
+  const handleButtonHover = (buttonId: string, isHovering: boolean) => {
+    setButtonAnimations(prev => ({
+      ...prev,
+      [buttonId]: {
+        ...prev[buttonId],
+        scale: isHovering ? 1.05 : 1
+      }
+    }));
+  };
+
+  // Button tap animation handler
+  const handleButtonTap = (buttonId: string, isTapping: boolean) => {
+    setButtonAnimations(prev => ({
+      ...prev,
+      [buttonId]: {
+        ...prev[buttonId],
+        scale: isTapping ? 0.95 : 1.05
+      }
+    }));
+  };
+
   useEffect(() => {
     return () => {
       if (confirmClear.timeoutId) {
         clearTimeout(confirmClear.timeoutId);
+      }
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
       }
     };
   }, [confirmClear.timeoutId]);
@@ -236,15 +355,21 @@ export default function ChatAssistant() {
           <span>AI Assistant</span>
         </div>
 
-        <motion.button
+        <button
           onClick={handleClearClick}
+          onMouseEnter={() => handleButtonHover('clear', true)}
+          onMouseLeave={() => handleButtonHover('clear', false)}
+          onMouseDown={() => handleButtonTap('clear', true)}
+          onMouseUp={() => handleButtonTap('clear', false)}
+          style={{
+            transform: `scale(${buttonAnimations['clear']?.scale || 1})`,
+            transition: 'transform 0.2s ease'
+          }}
           className={`flex items-center gap-2 px-2 py-1 rounded-md transition-colors ${
             confirmClear.show
               ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
               : "hover:bg-background/80"
           }`}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
         >
           {confirmClear.show ? (
             <>
@@ -254,15 +379,18 @@ export default function ChatAssistant() {
           ) : (
             <Trash2 size={16} className="text-muted-foreground" />
           )}
-        </motion.button>
+        </button>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-primary/10 scrollbar-track-transparent text-sm">
         {messages.map((msg, i) => (
-          <motion.div
+          <div
             key={i}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            style={{
+              opacity: messageAnimations[i]?.opacity || 0,
+              transform: `translateY(${messageAnimations[i]?.y || 10}px)`,
+              transition: 'opacity 0.3s ease, transform 0.3s ease'
+            }}
             className={`flex gap-2 ${
               msg.role === "user" ? "flex-row-reverse" : ""
             }`}
@@ -316,40 +444,49 @@ export default function ChatAssistant() {
               </ReactMarkdown>
 
               {i === 0 && messages.length === 1 && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
+                <div
+                  style={{
+                    opacity: quickOptionsAnimation.opacity,
+                    transition: 'opacity 0.3s ease'
+                  }}
                   className="mt-4 flex flex-col gap-2"
                 >
-                  {QUICK_OPTIONS.map((option) => (
-                    <motion.button
+                  {QUICK_OPTIONS.map((option, index) => (
+                    <button
                       key={option.text}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      onMouseEnter={() => handleButtonHover(`quick-${index}`, true)}
+                      onMouseLeave={() => handleButtonHover(`quick-${index}`, false)}
+                      onMouseDown={() => handleButtonTap(`quick-${index}`, true)}
+                      onMouseUp={() => handleButtonTap(`quick-${index}`, false)}
+                      style={{
+                        transform: `scale(${buttonAnimations[`quick-${index}`]?.scale || 1})`,
+                        transition: 'transform 0.2s ease'
+                      }}
                       onClick={() => handleQuickOptionClick(option)}
                       className="text-left px-3 py-2 rounded-md bg-background/50 hover:bg-background/80 transition-colors text-sm"
                       disabled={isTyping || remainingMessages <= 0}
                     >
                       {option.text}
-                    </motion.button>
+                    </button>
                   ))}
-                </motion.div>
+                </div>
               )}
             </div>
-          </motion.div>
+          </div>
         ))}
         {isTyping && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <div
+            style={{
+              opacity: typingAnimation.opacity,
+              transition: 'opacity 0.3s ease'
+            }}
             className="flex gap-2"
           >
             <Bot size={24} />
             <div className="bg-muted rounded-lg p-3">
               <span className="animate-pulse">...</span>
             </div>
-          </motion.div>
+          </div>
         )}
         <div ref={messagesEndRef} />
       </div>
