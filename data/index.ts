@@ -33,17 +33,17 @@ const data = {
         id: 1,
         title: "Hurudevs",
         description:
-          "Platform to sell online courses, helping empower women in tech by making coding education accessible.\n\n Technologies Used: Next.js, React.js, CSS, Stripe API.",
+          "Hurudevs is Kenya's leading web development agency specializing in creative websites, AI, branding, and SEO services.",
         image: "/projects-imgs/cw.png",
-        previewLink: "https://huru-devs.tech",
+        previewLink: "https://huru-devs.pages.dev/",
       },
       {
         id: 2,
         title: "Davinxi Cabin",
         description:
-          "A professional and visually appealing website that captures the vintage style of the business while ensuring smooth performance and easy navigation. \n\n Technologies Used: Next.js, Tailwind CSS, React.js.",
+          "An online school that combines expert instruction, certified courses, and a vibrant community to help you achieve your goals—whether you're mastering coding, exploring chess strategies, or gaining new skills to fuel your ambitions.",
         image: "/projects-imgs/retrocech.png",
-        previewLink: "https://davinxicabin.vercel.app",
+        previewLink: "https://davinxicabin.netlify.app",
       },
       {
         id: 3,
