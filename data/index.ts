@@ -51,7 +51,7 @@ const data = {
         description:
           "Stellar Tempo is a cosmic, neubrutalist web app designed to integrate your life schedule and creative passions into one engaging platform. Balancing high-impact tech projects with soulful music creation.",
         image: "/projects-imgs/stellar-tempo.png",
-        previewLink: "https://stellar-tempo.vercel.app",
+        previewLink: "https://stellar-tempo.netlify.app",
       },
       {
         id: 4,
@@ -59,7 +59,7 @@ const data = {
         description:
           "A reliable and polished website that makes it easy for the expert to share their skills and impress potential clients or employers. \n\n Technologies Used: Next.js, React.js, CSS.",
         image: "/projects-imgs/portfolio.png",
-        previewLink: "https://lucy-sees.vercel.app",
+        previewLink: "https://lucy-wanjiru-mwangi.netlify.app",
       },
       // {
       //   id: 5,
@@ -67,8 +67,8 @@ const data = {
       //   description:
       //     "Clone of the Trello App which is a popular project management tool designed to help individuals and teams organize tasks and collaborate efficiently. It uses boards, lists, and cards to visually represent projects and tasks, making it easy to track progress and prioritize work.",
       //   image: "/projects-imgs/trello.png",
-      //   githubLink: "https://github.com/mo-hassann/trello-app",
-      //   previewLink: "https://trello-app-v1.vercel.app",
+      //   githubLink: "https://github.com/lucy-sees/trello-app",
+      //   previewLink: "https://trello-clone.netlify.app",
       // },
     ],
   },
