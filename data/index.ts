@@ -50,7 +50,7 @@ const data = {
         title: "Stellar Tempo",
         description:
           "Stellar Tempo is a cosmic, neubrutalist web app designed to integrate your life schedule and creative passions into one engaging platform. Balancing high-impact tech projects with soulful music creation.",
-        image: "/projects-imgs/stella-tempo.png",
+        image: "/projects-imgs/stellar-tempo.png",
         previewLink: "https://stellar-tempo.vercel.app",
       },
       {
