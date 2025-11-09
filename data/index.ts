@@ -34,7 +34,7 @@ const data = {
         title: "Hurudevs",
         description:
           "Hurudevs is Kenya's leading web development agency specializing in creative websites, AI, branding, and SEO services.",
-        image: "/projects-imgs/cw.png",
+        image: "/projects-imgs/hurudevs.png",
         previewLink: "https://huru-devs.pages.dev/",
       },
       {
@@ -42,7 +42,7 @@ const data = {
         title: "Davinxi Cabin",
         description:
           "An online school that combines expert instruction, certified courses, and a vibrant community to help you achieve your goals—whether you're mastering coding, exploring chess strategies, or gaining new skills to fuel your ambitions.",
-        image: "/projects-imgs/retrocech.png",
+        image: "/projects-imgs/davinxi.png",
         previewLink: "https://davinxicabin.netlify.app",
       },
       {
@@ -50,7 +50,7 @@ const data = {
         title: "Stellar Tempo",
         description:
           "Stellar Tempo is a cosmic, neubrutalist web app designed to integrate your life schedule and creative passions into one engaging platform. Balancing high-impact tech projects with soulful music creation.",
-        image: "/projects-imgs/e-commerce.png",
+        image: "/projects-imgs/stella-tempo.png",
         previewLink: "https://stellar-tempo.vercel.app",
       },
       {
@@ -58,7 +58,7 @@ const data = {
         title: "Personal Portfolio Website",
         description:
           "A reliable and polished website that makes it easy for the expert to share their skills and impress potential clients or employers. \n\n Technologies Used: Next.js, React.js, CSS.",
-        image: "/projects-imgs/lukaskadela.png",
+        image: "/projects-imgs/portfolio.png",
         previewLink: "https://lucy-sees.vercel.app",
       },
       // {
